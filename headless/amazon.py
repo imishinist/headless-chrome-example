@@ -1,3 +1,4 @@
+import json
 import os
 import time
 
@@ -20,6 +21,9 @@ class Amazon:
 
     def __init__(self, driver):
         self.__driver = driver
+
+    def index(self):
+        self.__driver.get('https://www.amazon.co.jp/')
 
     def login(self, email, password, totp_secret):
         totp = pyotp.TOTP(totp_secret)
@@ -48,6 +52,20 @@ class Amazon:
         if email is None or password is None:
             return False
         return True
+
+    def save_cookies(self, file_name: str):
+        with open(file_name, 'w') as f:
+            json.dump(self.__driver.get_cookies(), f)
+
+    """
+    load_cookies を呼ぶ前に、一度サイトにアクセスしている必要がある
+    """
+    def load_cookies(self, file_name: str):
+        with open(file_name) as f:
+            cookies = json.load(f)
+
+        for cookie in cookies:
+            self.__driver.add_cookie(cookie)
 
 
 def generate_driver():

@@ -19,7 +19,7 @@ class Amazon:
                 "=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid" \
                 ".net%2Fauth%2F2.0& "
 
-    def __init__(self, driver):
+    def __init__(self, driver: webdriver.Chrome):
         self.__driver = driver
 
     def index(self):
@@ -48,7 +48,8 @@ class Amazon:
         self.__driver.find_element(By.ID, 'auth-signin-button').submit()
         return True
 
-    def __validate(self, email, password):
+    @staticmethod
+    def __validate(email, password):
         if email is None or password is None:
             return False
         return True

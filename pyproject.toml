@@ -1,17 +1,23 @@
-[tool.poetry]
+[project]
 name = "headless"
 version = "0.1.0"
-description = ""
-authors = ["Taisuke Miyazaki <imishinist@gmail.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-selenium = "^4.6.0"
-pyotp = "^2.7.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+description = "Add a short description here"
+authors = [
+    { name = "Taisuke Miyazaki", email = "imishinist@gmail.com" }
+]
+dependencies = [
+    "selenium~=4.11.2",
+    "pyotp~=2.9.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.metadata]
+allow-direct-references = true
